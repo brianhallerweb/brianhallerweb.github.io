@@ -1,13 +1,16 @@
 body {
-  margin-top: 80px; }
+  margin-top: 80px;
+}
 
 .navbar {
   box-shadow: 2px 2px 5px #3292a6;
-  opacity: 0.9;
-  background: #fff; }
-  .navbar .nav-item {
-    font-size: 1.2rem;
-    padding-right: 20px; }
+  background: #fff;
+}
+.navbar .nav-item {
+  font-size: 1.2rem;
+  padding-right: 20px;
+}
 
 h1 {
-  color: #3292a6; }
+  color: #3292a6;
+}
