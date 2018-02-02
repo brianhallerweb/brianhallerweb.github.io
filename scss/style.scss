@@ -4,11 +4,12 @@ $primary-overlay: rgba(50, 146, 166, 0.3);
 
 body {
   margin-top: 100px;
+  background-color: #fff;
 }
 
 .navbar {
   box-shadow: 2px 2px 5px $primary;
-  background: #fff;
+  background: #fcfcfc;
 
   .nav-item {
     font-size: 1.2rem;

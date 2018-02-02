@@ -1,9 +1,10 @@
 body {
-  margin-top: 100px; }
+  margin-top: 100px;
+  background-color: #fff; }
 
 .navbar {
   box-shadow: 2px 2px 5px #3292a6;
-  background: #fff; }
+  background: #fcfcfc; }
   .navbar .nav-item {
     font-size: 1.2rem;
     padding-right: 20px; }
