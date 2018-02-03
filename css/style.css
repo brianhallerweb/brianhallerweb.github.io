@@ -1,6 +1,6 @@
 body {
-  margin-top: 100px;
-  background-color: #fdfdfd; }
+  margin-top: 140px;
+  background-color: #fcfcfc; }
 
 .navbar {
   box-shadow: 2px 2px 5px #3292a6;
@@ -13,7 +13,7 @@ h1 {
   color: #3292a6; }
 
 h3 {
-  color: #212121; }
+  color: #323232; }
 
 img:hover {
   opacity: 0.8; }
