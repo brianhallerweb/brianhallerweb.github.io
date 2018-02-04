@@ -1,6 +1,6 @@
 body {
-  margin-top: 140px;
-  background-color: #fcfcfc; }
+  margin-top: 110px;
+  background-color: #fafafa; }
 
 .navbar {
   box-shadow: 2px 2px 5px #3292a6;
@@ -17,3 +17,8 @@ h3 {
 
 #portfolio img:hover {
   opacity: 0.8; }
+
+footer {
+  box-shadow: 2px -2px 5px #3292a6;
+  background: #3292a6;
+  width: 100%; }

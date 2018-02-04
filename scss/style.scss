@@ -3,8 +3,8 @@ $primary: #3292a6;
 $primary-overlay: rgba(50, 146, 166, 0.3);
 
 body {
-  margin-top: 140px;
-  background-color: #fcfcfc;
+  margin-top: 110px;
+  background-color: #fafafa;
 }
 
 .navbar {
@@ -29,4 +29,10 @@ h3 {
   img:hover {
     opacity: 0.8;
   }
+}
+
+footer {
+  box-shadow: 2px -2px 5px $primary;
+  background: $primary;
+  width: 100%;
 }
