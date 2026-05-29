@@ -198,6 +198,36 @@
       margin: 0 0 10px;
     }
 
+    .review-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .review-link {
+      align-items: center;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--blue-dark);
+      display: inline-flex;
+      gap: 10px;
+      font-weight: 800;
+      padding: 11px 14px;
+      text-decoration: none;
+    }
+
+    .review-link:hover {
+      background: var(--soft-blue);
+    }
+
+    .google-g {
+      display: block;
+      height: 22px;
+      width: 22px;
+    }
+
     .equipment-collage {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr 0.9fr;
@@ -446,6 +476,7 @@
           <a href="#maintenance">Maintenance</a>
           <a href="#costs">Costs</a>
           <a href="#about">About</a>
+          <a href="#reviews">Reviews</a>
           <a href="#contact">Contact</a>
         </nav>
       </header>
@@ -568,6 +599,23 @@
           <p>
             I want to provide straightforward service for everyday people who need help with their heating and cooling equipment.
           </p>
+        </section>
+
+        <section id="reviews">
+          <h2>Reviews</h2>
+          <p>
+            You can read Google reviews or leave a review if I have helped with your heating or cooling equipment.
+          </p>
+          <div class="review-actions">
+            <a class="review-link" href="https://share.google/59yv1pUtLJ5r26s4n" target="_blank" rel="noopener">
+              <img class="google-g" src="images/google-g.png" alt="" aria-hidden="true" />
+              <span>Read Google Reviews</span>
+            </a>
+            <a class="review-link" href="https://g.page/r/CfdBVK6ZZjJREAI/review" target="_blank" rel="noopener">
+              <img class="google-g" src="images/google-g.png" alt="" aria-hidden="true" />
+              <span>Leave a Google Review</span>
+            </a>
+          </div>
         </section>
 
         <section id="contact">
