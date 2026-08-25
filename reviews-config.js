@@ -3,6 +3,6 @@
  * Restrict the key to brianhallerhvac.com and www.brianhallerhvac.com.
  */
 window.GOOGLE_REVIEWS_CONFIG = {
-  apiKey: "AIzaSyAT_tqtYO9qONwIiOnmzmd56mucndnf1nk",
+  apiKey: "__GOOGLE_MAPS_API_KEY__",
   placeId: "ChIJHwcPalzOHiYR90FUrplmMlE"
 };
