@@ -32,9 +32,13 @@
   font-size: 16px;
 }
 .google-review-summary-logo {
+  display: block;
   height: 25px;
   object-fit: contain;
   width: auto;
+}
+.google-review-summary-logo-link {
+  display: inline-flex;
 }
 .google-review-summary-button {
   background: #0b6ffb;

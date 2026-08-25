@@ -90,7 +90,13 @@
         const googleLogo = makeElement("img", "google-review-summary-logo");
         googleLogo.src = "https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png";
         googleLogo.alt = "Google";
-        ratingGroup.appendChild(googleLogo);
+        const googleLink = makeElement("a", "google-review-summary-logo-link");
+        googleLink.href = "https://maps.app.goo.gl/FfUn3sFw2zTsUM3u9";
+        googleLink.target = "_blank";
+        googleLink.rel = "noopener";
+        googleLink.setAttribute("aria-label", "View Brian Haller Heating and Cooling on Google Maps");
+        googleLink.appendChild(googleLogo);
+        ratingGroup.appendChild(googleLink);
       }
       summary.appendChild(ratingGroup);
       const reviewButton = makeElement("a", "google-review-summary-button", "Leave a review on Google");
