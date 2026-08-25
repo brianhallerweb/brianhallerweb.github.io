@@ -31,11 +31,17 @@
     const authorRow = makeElement("div", "google-review-author");
     const author = review.authorAttribution || {};
     if (author.photoURI) {
+      const avatarWrap = makeElement("span", "google-review-avatar-wrap");
       const avatar = makeElement("img", "google-review-avatar");
       avatar.src = author.photoURI;
       avatar.alt = "";
       avatar.referrerPolicy = "no-referrer";
-      authorRow.appendChild(avatar);
+      avatarWrap.appendChild(avatar);
+      const avatarGoogle = makeElement("img", "google-review-avatar-google");
+      avatarGoogle.src = "images/google-g.png";
+      avatarGoogle.alt = "";
+      avatarWrap.appendChild(avatarGoogle);
+      authorRow.appendChild(avatarWrap);
     }
     const authorText = makeElement("div");
     const authorLink = makeElement("a", "", author.displayName || "Google reviewer");
@@ -57,7 +63,7 @@
     card.appendChild(stars);
     card.appendChild(makeElement("p", "google-review-text", review.text || "Rating-only review"));
 
-    const source = makeElement("a", "google-review-source", "View this review on Google Maps");
+    const source = makeElement("a", "google-review-source", "Read more on Google");
     source.href = review.googleMapsURI || author.uri || "https://www.google.com/maps";
     source.target = "_blank";
     source.rel = "noopener";
@@ -74,17 +80,24 @@
 
     if (overallRating) {
       const summary = makeElement("div", "google-review-summary");
-      const googleLogo = makeElement("img", "google-review-summary-logo");
-      googleLogo.src = "images/google-g.png";
-      googleLogo.alt = "Google";
-      summary.appendChild(googleLogo);
-      summary.appendChild(makeElement("strong", "", Number(overallRating).toFixed(1)));
+      const ratingGroup = makeElement("div", "google-review-summary-rating");
+      ratingGroup.appendChild(makeElement("strong", "", Number(overallRating).toFixed(1)));
       const summaryStars = makeElement("span", "google-review-summary-stars", "★★★★★");
       summaryStars.setAttribute("aria-label", overallRating + " out of 5 stars");
-      summary.appendChild(summaryStars);
+      ratingGroup.appendChild(summaryStars);
       if (reviewCount) {
-        summary.appendChild(makeElement("span", "google-review-summary-count", reviewCount + " Google reviews"));
+        ratingGroup.appendChild(makeElement("span", "google-review-summary-count", reviewCount + " reviews on"));
+        const googleLogo = makeElement("img", "google-review-summary-logo");
+        googleLogo.src = "images/google-g.png";
+        googleLogo.alt = "Google";
+        ratingGroup.appendChild(googleLogo);
       }
+      summary.appendChild(ratingGroup);
+      const reviewButton = makeElement("a", "google-review-summary-button", "Review us on Google");
+      reviewButton.href = "https://g.page/r/CfdBVK6ZZjJREAI/review";
+      reviewButton.target = "_blank";
+      reviewButton.rel = "noopener";
+      summary.appendChild(reviewButton);
       root.insertBefore(summary, stage);
     }
 
@@ -117,7 +130,7 @@
     }
 
     function start() {
-      if (reviews.length > 1) timer = window.setInterval(() => show(active + 1), 1000);
+      if (reviews.length > 1) timer = window.setInterval(() => show(active + 1), 3000);
     }
     function stop() { window.clearInterval(timer); }
     root.addEventListener("mouseenter", stop);
