@@ -88,7 +88,7 @@
       if (reviewCount) {
         ratingGroup.appendChild(makeElement("span", "google-review-summary-count", reviewCount + " reviews on"));
         const googleLogo = makeElement("img", "google-review-summary-logo");
-        googleLogo.src = "images/google-g.png";
+        googleLogo.src = "images/google-wordmark.png";
         googleLogo.alt = "Google";
         ratingGroup.appendChild(googleLogo);
       }
