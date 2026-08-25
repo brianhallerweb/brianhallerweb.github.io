@@ -41,10 +41,11 @@ jobs:
             exit 1
           fi
 
-          mkdir _site
-          cp -R . _site/
-          rm -rf _site/.git _site/.github
-          sed -i "s|__GOOGLE_MAPS_API_KEY__|${GOOGLE_MAPS_API_KEY}|g" _site/reviews-config.js
+          SITE_DIR="$RUNNER_TEMP/site"
+          mkdir "$SITE_DIR"
+          cp -R . "$SITE_DIR/"
+          rm -rf "$SITE_DIR/.git" "$SITE_DIR/.github"
+          sed -i "s|__GOOGLE_MAPS_API_KEY__|${GOOGLE_MAPS_API_KEY}|g" "$SITE_DIR/reviews-config.js"
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -52,7 +53,7 @@ jobs:
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: ${{ runner.temp }}/site
 
       - name: Publish website
         id: deployment
