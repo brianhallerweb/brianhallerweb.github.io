@@ -1,0 +1,59 @@
+name: Deploy website to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Prepare published files
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        run: |
+          if [ -z "$GOOGLE_MAPS_API_KEY" ]; then
+            echo "The GOOGLE_MAPS_API_KEY secret is missing."
+            exit 1
+          fi
+
+          if ! grep -q "__GOOGLE_MAPS_API_KEY__" reviews-config.js; then
+            echo "reviews-config.js does not contain the safe placeholder."
+            exit 1
+          fi
+
+          mkdir _site
+          cp -R . _site/
+          rm -rf _site/.git _site/.github
+          sed -i "s|__GOOGLE_MAPS_API_KEY__|${GOOGLE_MAPS_API_KEY}|g" _site/reviews-config.js
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Publish website
+        id: deployment
+        uses: actions/deploy-pages@v4
