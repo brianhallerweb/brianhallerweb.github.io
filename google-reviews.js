@@ -96,7 +96,7 @@
     }
 
     function start() {
-      if (reviews.length > 1) timer = window.setInterval(() => show(active + 1), 7000);
+      if (reviews.length > 1) timer = window.setInterval(() => show(active + 1), 4000);
     }
     function stop() { window.clearInterval(timer); }
     root.addEventListener("mouseenter", stop);

@@ -1,4 +1,5 @@
 .google-reviews-carousel { margin-top: 22px; }
+.top-reviews { padding: 4px 0 28px; }
 .google-review-stage { min-height: 255px; position: relative; }
 .google-review-card {
   background: var(--paper);
