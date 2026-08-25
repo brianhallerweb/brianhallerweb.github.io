@@ -65,16 +65,37 @@
     return card;
   }
 
-  function initializeCarousel(root, reviews, attributions) {
+  function initializeCarousel(root, reviews, attributions, overallRating, reviewCount) {
     const stage = root.querySelector(".google-review-stage");
     const controls = root.querySelector(".google-review-controls");
     const dots = root.querySelector(".google-review-dots");
     let active = 0;
     let timer;
 
+    if (overallRating) {
+      const summary = makeElement("div", "google-review-summary");
+      const googleLogo = makeElement("img", "google-review-summary-logo");
+      googleLogo.src = "images/google-g.png";
+      googleLogo.alt = "Google";
+      summary.appendChild(googleLogo);
+      summary.appendChild(makeElement("strong", "", Number(overallRating).toFixed(1)));
+      const summaryStars = makeElement("span", "google-review-summary-stars", "★★★★★");
+      summaryStars.setAttribute("aria-label", overallRating + " out of 5 stars");
+      summary.appendChild(summaryStars);
+      if (reviewCount) {
+        summary.appendChild(makeElement("span", "google-review-summary-count", reviewCount + " Google reviews"));
+      }
+      root.insertBefore(summary, stage);
+    }
+
     function show(index) {
       active = (index + reviews.length) % reviews.length;
-      stage.replaceChildren(buildCard(reviews[active]));
+      const visibleCount = window.matchMedia("(max-width: 700px)").matches ? 1 : Math.min(2, reviews.length);
+      const visibleCards = [];
+      for (let offset = 0; offset < visibleCount; offset += 1) {
+        visibleCards.push(buildCard(reviews[(active + offset) % reviews.length]));
+      }
+      stage.replaceChildren(...visibleCards);
       Array.from(dots.children).forEach((dot, dotIndex) => {
         dot.setAttribute("aria-current", String(dotIndex === active));
       });
@@ -96,13 +117,14 @@
     }
 
     function start() {
-      if (reviews.length > 1) timer = window.setInterval(() => show(active + 1), 4000);
+      if (reviews.length > 1) timer = window.setInterval(() => show(active + 1), 1000);
     }
     function stop() { window.clearInterval(timer); }
     root.addEventListener("mouseenter", stop);
     root.addEventListener("mouseleave", start);
     root.addEventListener("focusin", stop);
     root.addEventListener("focusout", start);
+    window.addEventListener("resize", () => show(active));
     show(0);
     start();
   }
@@ -112,10 +134,16 @@
       await loadGoogleMaps();
       const { Place } = await google.maps.importLibrary("places");
       const place = new Place({ id: config.placeId });
-      await place.fetchFields({ fields: ["reviews"] });
+      await place.fetchFields({ fields: ["rating", "userRatingCount", "reviews"] });
       const reviews = place.reviews || [];
       if (!reviews.length) return;
-      carousels.forEach((root) => initializeCarousel(root, reviews, place.attributions));
+      carousels.forEach((root) => initializeCarousel(
+        root,
+        reviews,
+        place.attributions,
+        place.rating,
+        place.userRatingCount
+      ));
     } catch (error) {
       console.error("Google reviews could not be loaded.", error);
     }
