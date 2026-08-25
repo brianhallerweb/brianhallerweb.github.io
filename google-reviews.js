@@ -93,7 +93,7 @@
         ratingGroup.appendChild(googleLogo);
       }
       summary.appendChild(ratingGroup);
-      const reviewButton = makeElement("a", "google-review-summary-button", "Review me on Google");
+      const reviewButton = makeElement("a", "google-review-summary-button", "Leave a review on Google");
       reviewButton.href = "https://g.page/r/CfdBVK6ZZjJREAI/review";
       reviewButton.target = "_blank";
       reviewButton.rel = "noopener";
